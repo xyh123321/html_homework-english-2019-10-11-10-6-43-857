@@ -4,7 +4,139 @@
     <meta charset="UTF-8">
     <title>HTML</title>
 </head>
-<body>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+<style>
+    .icon-user {
+        position: absolute;
+        z-index:5;
+        background-image: url(icon.png); 
+        background-repeat: no-repeat; 
+        width: 60px;
+        height: 60px;
+        transform: scale(0.3);
+        margin: -15px 0px 0px -45px ;
 
+    }
+    div {
+        margin-left: 20px;
+    }
+</style>
+<body>
+    <form action="" id="testForm" onsubmit="return checkForm()">
+        <h2>Unified Modeling Language Theory Test</h2>
+        <div>
+            <p>Test Subject：Unified Modeling Language   Time：100 minute      Score：100</p>
+            <span style="margin-right: 15px;">Class：<input type="text" name="class" ><i class="icon-user"></i></span>
+            <span style="margin-right: 15px;">Studeng ID：<input type="text" name="stuID" ></span>
+            <span style="margin-right: 15px;">Name：<input type="text" name="name" ></span>
+        </div>
+        <h2>1、Fill in the blanks(5 points per space,20 points total)</h2>
+        <div>
+            <P>1.The full name of UML in Chinese is：<input type="text" name="umlName" id="umlName"></P>
+            <P>2.The most prominent feature of the object is：<input type="text" name="encapsulation" style="margin-right: 7px;" id="encapsulation"><input type="text" name="inheritance" style="margin-right: 7px;" id="inheritance"><input type="text" name="Polymorphism" id="Polymorphism"></P>
+        </div>
+        <h2>2、Mutiple chioce question(10 points per space,20 points total)</h2>
+        <div>
+            <dl>
+                <dt>1.The relationship between UML and software engineering is:</dt>
+                <dd><input type="radio" name="radio1" id="radio1_0" value="A">(A)UML is software engineering</dd>
+                <dd><input type="radio" name="radio1" id="radio1_1" value="B">(B)UML participates in several stages of the software development process in software engineering</dd>
+                <dd><input type="radio" name="radio1" id="radio1_2" value="C">(C)UML has  nothing to do with software engineering</dd>
+                <dd><input type="radio" name="radio1" id="radio1_3" value="D">(D)UML is part of software engineering</dd>
+            </dl>
+            <dl>
+                <dt>2.Java language support:</dt>
+                <dd><input type="radio" name="radio2" id="radio2_0" value="A">(A)Single inheritance</dd>
+                <dd><input type="radio" name="radio2" id="radio2_1" value="B">(B)Mutiple inheritance</dd>
+                <dd><input type="radio" name="radio2" id="radio2_2" value="C">(C)Single inheritance and mutiple inheritance support</dd>
+                <dd><input type="radio" name="radio2" id="radio2_3" value="D">(D)Single inheritance and mutiple inheritance are not support</dd>
+            </dl>
+        </div>
+        <h2>3、Mutiple chioce(10 points per space,20 points total)</h2>
+        <div>
+            <dl>
+                <dt>1.The granularity of the use case is divided into the following three:</dt>
+                <dd><input type="checkbox" name="checkbox1" id="checkbox1_0" value="A">(A)Overview level</dd>
+                <dd><input type="checkbox" name="checkbox1" id="checkbox1_1" value="B">(B)Demand level</dd>
+                <dd><input type="checkbox" name="checkbox1" id="checkbox1_2" value="C">(C)User target level</dd>
+                <dd><input type="checkbox" name="checkbox1" id="checkbox1_3" value="D">(D)Sub-function level</dd>
+            </dl>
+            <dl>
+                <dt>2.The class diagram consits of which of the following three parts:</dt>
+                <dd><input type="checkbox" name="checkbox2" id="checkbox2_0" value="A">(A)Name</dd>
+                <dd><input type="checkbox" name="checkbox2" id="checkbox2_1" value="B">(B)Atrribute</dd>
+                <dd><input type="checkbox" name="checkbox2" id="checkbox2_2" value="C">(C)Operation</dd>
+                <dd><input type="checkbox" name="checkbox2" id="checkbox2_3" value="D">(D)Function</dd>
+            </dl>
+        </div>
+        <h2>4、True or False(10 points per space,20 points total)</h2>
+        <div>
+            <dl style="float: left; margin-top: 0px; margin-right: 20px;">1.Use case diagram are only used to communicate and communicate wiht customers to determine demand</dl>
+            <dd ><input type="radio" name="judge1" id="judge1_0" value="Y">√<input type="radio" name="judge1" id="judge1_1" value="N" style="margin-left: 15px;">×</dd>
+            <dl style="float: left; margin-top: 0px; margin-right: 20px;">2.In the state diagram,the termination state allows any number of multiples in a state diagtam</dl>
+            <dd style="margin-top: 16px;"><input type="radio" name="judge2" id="judge2_0" value="Y">√<input type="radio" name="judge2" id="judge2_1" value="N" style="margin-left: 15px;">×</dd>
+        </div>
+        <h2>5、Short answer question(20 points per space,20 points total)</h2>
+        <div>
+            <p>1.Briefly describe whate the model is and how it behaves?</p>
+            <textarea name="textarea" id="textarea" cols="120" rows="13"></textarea>
+        </div>
+        <footer style="margin-top: 10px;">
+            <button type="submit">Calculating score</button>
+        </footer>
+    </form>
+    <script type="text/javascript">
+        
+       function checkForm() {
+           var testForm = document.getElementById('testForm');
+           let score = 0;
+            if($('#umlName').val().toLowerCase() === "Unified Modeling Language".toLowerCase()){
+                score+=5;
+            }
+            if($('#encapsulation').val().toLowerCase()!==""&&("encapsulation+inheritance+polymorphism").search($('#encapsulation').val().toLowerCase())!=-1){
+                score+=5;
+            }
+            if($('#inheritance').val().toLowerCase()!==""&&("encapsulation+inheritance+polymorphism").search($('#inheritance').val().toLowerCase())!=-1){
+                score+=5;
+            }
+            if($('#Polymorphism').val().toLowerCase()!==""&&("encapsulation+inheritance+polymorphism").search($('#Polymorphism').val().toLowerCase())!=-1){
+                score+=5;
+            }
+            if($("input[name='radio1']:checked").val() === "B") {
+                score+=10;
+            }
+            if($("input[name='radio2']:checked").val() === "A") {
+                score+=10;
+            }
+        var checkbox1 ="";
+        var checkbox2 ="";
+        $("input[type='checkbox'][name='checkbox1']").each(function() {
+                if ($(this).is(":checked")) {
+                    checkbox1+=$(this).val()
+                }
+        });
+        if(checkbox1==="ABD"){
+            score+=10;
+        }
+        $("input[type='checkbox'][name='checkbox2']").each(function() {
+                if ($(this).is(":checked")) {
+                    checkbox2+=$(this).val()
+                }
+        });
+        if(checkbox2==="ABC"){
+            score+=10;
+        }
+        if($("input[name='judge1']:checked").val() === "N") {
+            score+=10;
+        }
+        if($("input[name='judge2']:checked").val() === "Y") {
+            score+=10;
+        }
+        if($("#textarea").val()!==""){
+            score+=20;
+        }
+        alert("your score is："+score);
+       }
+    </script>
 </body>
 </html>
